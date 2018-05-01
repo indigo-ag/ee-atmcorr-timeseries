@@ -16,7 +16,7 @@ import zipfile
 import time
 from itertools import product
 from scipy.interpolate import LinearNDInterpolator
-import mission_specifics
+from . import mission_specifics
 
 class handler:
   """

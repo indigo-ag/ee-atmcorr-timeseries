@@ -9,17 +9,19 @@ correction)
 """
 
 import math
-import mission_specifics
+
+from . import mission_specifics
+
 
 def atmcorr(radiance, perihelion, day_of_year):
   """
   Atmospherically corrects radiance using correction coefficients
   at perihelion adjusted for Earth's ellipitcal orbit
   """
-    
+
   # elliptical orbit correction
   elliptical_orbit_correction = 0.03275104*math.cos(math.radians(day_of_year/1.04137484)) + 0.96804905
-  
+
   # correction coefficients
   a = perihelion[0] * elliptical_orbit_correction
   b = perihelion[1] * elliptical_orbit_correction
@@ -40,8 +42,8 @@ def surface_reflectance_timeseries(meanRadiance, iLUTs, mission):
   """
 
   feature_collection = meanRadiance['features']
-  
-  # band names 
+
+  # band names
   ee_bandnames = mission_specifics.ee_bandnames(mission)
   py6s_bandnames = mission_specifics.py6s_bandnames(mission)
 
@@ -49,13 +51,13 @@ def surface_reflectance_timeseries(meanRadiance, iLUTs, mission):
   timeSeries = {'timeStamp':[], 'mission':mission}
   for ee_bandname in ee_bandnames:
     timeSeries[ee_bandname] = []
-  
+
   # atmospherically correct each scene in collection
   for feature in feature_collection:
-    
+
     # time stamp
     timeSeries['timeStamp'].append(feature['properties']['timeStamp'])
-    
+
     # mean average pixel radiances
     mean_averages = feature['properties']['mean_averages']
 

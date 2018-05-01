@@ -12,9 +12,9 @@ Returns a feature collection which could be input into, for exampled:
 """
 
 import ee
-from atmospheric import Atmospheric
-from cloudRemover import CloudRemover
-import mission_specifics
+from . import mission_specifics
+from .atmospheric import Atmospheric
+from .cloudRemover import CloudRemover
 
 class AtmcorrInput:
   """
