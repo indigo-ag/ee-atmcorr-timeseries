@@ -1,8 +1,7 @@
 import os
 import ee
 import pandas as pd
-# import interpolated_lookup_tables as iLUT
-from atmcorr.interpolated_lookup_tables import interpolated_lookup_tables as iLUT
+import interpolated_lookup_tables as iLUT
 from ee_requests import request_meanRadiance
 from atmcorr_timeseries import surface_reflectance_timeseries
 from mission_specifics import ee_bandnames
