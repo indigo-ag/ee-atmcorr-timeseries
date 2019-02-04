@@ -9,7 +9,12 @@ jobs:
       indigo_image_version: python:3.6.2-indigo
     steps:
       - checkout
-      - python/setup_local_env_install_deps
+      - run:
+          name: Setup local-env and pip install
+          command: |
+              python -m venv local-env
+              . local-env/bin/activate
+              pip install -r requirements.txt
       - shared/save_workspace_cache
   release:
     executor:
@@ -20,7 +25,6 @@ jobs:
         - run:
             no_output_timeout: 30m
             command: |
-              . local-env/bin/activate
               git config --global user.email "automation@indigoag.com"
               git config --global user.name "Automation"
               . local-env/bin/activate
@@ -40,4 +44,4 @@ workflows:
             filters:
               branches:
                 only:
-                  - artifactory #master
+                  - master
