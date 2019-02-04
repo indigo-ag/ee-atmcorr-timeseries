@@ -1,0 +1,43 @@
+version: 2.1
+orbs:
+  shared: indigo/shared@volatile
+  python: indigo/python@volatile
+jobs:
+  build:
+    executor:
+      name: shared/default
+      indigo_image_version: python:3.6.2-indigo
+    steps:
+      - checkout
+      - python/setup_local_env_install_deps
+      - shared/save_workspace_cache
+  release:
+    executor:
+      name: shared/default
+      indigo_image_version: python:3.6.2-indigo
+    steps:
+        - shared/restore_workspace_cache
+        - run:
+            no_output_timeout: 30m
+            command: |
+              . local-env/bin/activate
+              git config --global user.email "automation@indigoag.com"
+              git config --global user.name "Automation"
+              . local-env/bin/activate
+              semantic-release publish
+              python setup.py sdist upload -r local
+
+workflows:
+    version: 2
+    build_and_deploy:
+      jobs:
+        - build:
+            context: org-global
+        - release:
+            context: org-global
+            requires:
+              - build
+            filters:
+              branches:
+                only:
+                  - artifactory

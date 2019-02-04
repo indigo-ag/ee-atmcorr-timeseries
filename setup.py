@@ -2,10 +2,12 @@ from setuptools import setup, find_packages  # Always prefer setuptools over dis
 
 import atmcorr
 
+__version__ = '0.1.2'
+
 setup(
     name='atmcorr',
     version=atmcorr.__version__,
-    url='https://github.com/telluslabs/ee-atmcorr-timeseries',
+    url='https://github.com/indigo-ag/ee-atmcorr-timeseries',
     author='telluslabs',
     author_email='admin@telluslabs.com',
     description="TellusLabs Cassandra Connector",

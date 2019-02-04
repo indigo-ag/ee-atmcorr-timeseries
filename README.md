@@ -47,3 +47,10 @@ jupyter-notebook ee-atmcorr-timeseries.ipynb --ip='*' --port=8888 --allow-root
 This code is optimized to run atmospheric correction of large image collections. It trades setup-time (i.e. ~30 mins) for run time. Setup is only performed once and is fully automated. This solves the problem of running radiative transfer code for each image which would take ~2 secs/scene, 500 scenes would therefore take over 16 mins (everytime).
 
 It does this using the [6S emulator](https://github.com/samsammurphy/6S_emulator) which is based on n-dimensional interpolated lookup tables (iLUTs). These iLUTs are automatically downloaded and constructed locally.
+
+## Publishing
+
+While integration work is in-progress we will be publishing to both tellus internal s3 pypi and artifactory
+
+* to publish to tellus internal s3 pypi, make sure s3 creds point to the correct account and run ./scripts/publish.sh
+* circleci will publish to artifactory and bases the version on semantic-release [commit formatting](https://github.com/angular/angular.js/blob/master/DEVELOPERS.md#-git-commit-guidelines)
