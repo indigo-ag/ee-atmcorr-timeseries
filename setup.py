@@ -2,8 +2,6 @@ from setuptools import setup, find_packages  # Always prefer setuptools over dis
 
 import atmcorr
 
-__version__ = '0.1.2'
-
 setup(
     name='atmcorr',
     version=atmcorr.__version__,
