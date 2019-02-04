@@ -22,14 +22,7 @@ jobs:
       indigo_image_version: python:3.6.2-indigo
     steps:
         - shared/restore_workspace_cache
-        - run:
-            no_output_timeout: 30m
-            command: |
-              git config --global user.email "automation@indigoag.com"
-              git config --global user.name "Automation"
-              . local-env/bin/activate
-              semantic-release publish
-              python setup.py sdist upload -r local
+        - python/semantic_release_publish
 
 workflows:
     version: 2
